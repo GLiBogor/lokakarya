@@ -117,6 +117,7 @@ $TTL	604800
 10	IN	PTR	ubuntu.bogor.ok.
 
 5. Restart service bind9
+# systemctl enable bind9
 # systemctl restart bind9
 # systemctl status bind9
 
@@ -124,3 +125,55 @@ $TTL	604800
 # dig @10.10.10.10 bogor.ok
 # dig @10.10.10.10 bogor.ok mx
 # dig @10.10.10.10 ubuntu.bogor.ok
+
+
+##### LAMP Server #####
+1. Instal paket apache2
+# apt install apache2
+
+2. Cek service apache2
+# systemctl enable apache2
+# systemctl restart apache2
+# systemctl status apache2
+
+3. Test membuat file index.html
+# mv /var/www/html/index.html /var/www/html/index.html.orig
+# vim /var/www/html/index.html
+
+Uji coba web server
+
+4. Browsing dari laptop ke VM ubuntu (http://10.10.10.10)
+
+5. Test membuat file phpinfo
+# vim /var/www/html/phpinfo.php
+
+
+<?php
+
+phpinfo();
+
+?>
+
+6. Instal paket libapache2-mod-php
+# apt install libapache2-mod-php
+# systemctl restart apache2
+# systemctl status apache2
+
+7. Browsing dari laptop ke VM ubuntu (http://10.10.10.10/phpinfo.php)
+
+8. Instal paket mysql-server dan phpmyadmin
+# apt install mysql-server phpmyadmin
+# systemctl restart mysql
+# systemctl status mysql
+
+9. Browsing dari laptop ke PHPMyAdmin VM ubuntu (http://10.10.10.10/phpmyadmin)
+
+10. Unduh wordpress
+# wget -c https://wordpress.org/latest.tar.gz
+
+11. Ekstrak file wordpress dan pindah ke /var/www/html/
+# tar -xf latest.tar.gz
+# ls
+# mv wordpress /var/www/html/
+
+12. Browsing dari laptop ke wordpress VM ubuntu (http://10.10.10.10/wordpress)
