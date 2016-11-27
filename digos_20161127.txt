@@ -75,3 +75,26 @@ zone "10.10.10.in-addr.arpa" {
         type master;
         file "/etc/bind/db.10.10.10";
 };
+
+3. Buat file db forward DNS
+# cp /etc/bind/db.local /etc/bind/db.bogor.ok
+# vim /etc/bind/db.bogor.ok
+
+;
+; BIND data file for domain bogor.ok
+;
+$TTL	604800
+@	IN	SOA	ubuntu.bogor.ok. root.bogor.ok. (
+		     2016112701		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	ubuntu.bogor.ok.
+@       IN      MX  10  ubuntu.bogor.ok.
+@	IN	A	10.10.10.10
+ubuntu  IN      A       10.10.10.10
+www     IN      CNAME   ubuntu
+mail    IN      CNAME   ubuntu
+
