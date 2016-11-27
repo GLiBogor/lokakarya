@@ -177,3 +177,32 @@ phpinfo();
 # mv wordpress /var/www/html/
 
 12. Browsing dari laptop ke wordpress VM ubuntu (http://10.10.10.10/wordpress)
+
+13. Membuat VirtualHost Apache. Edit file konfigurasi /etc/apache2/sites-enabled/000-default.conf
+# vim /etc/apache2/sites-enabled/000-default.conf
+<VirtualHost *:80>
+        ServerName www.bogor.ok
+        ServerAdmin webmaster@bogor.ok
+        DocumentRoot /var/www/html/www
+	ErrorLog ${APACHE_LOG_DIR}/www-error.log
+        CustomLog ${APACHE_LOG_DIR}/www-access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+        ServerName blog.bogor.ok
+        ServerAdmin webmaster@bogor.ok
+        DocumentRoot /var/www/html/wordpress
+	ErrorLog ${APACHE_LOG_DIR}/wordpress-error.log
+        CustomLog ${APACHE_LOG_DIR}/wordpress-access.log combined
+</VirtualHost>
+
+14. Copy file index.html ke folder www
+# mkdir /var/www/html/www
+# cp /var/www/html/index.html /var/www/html/www/index.html
+
+15. Edit file /etc/hosts laptop
+# vim /etc/hosts
+
+10.10.10.10	blog.bogor.ok www.bogor.ok
+
+16. Test browsing dari laptop http://blog.bogor.ok dan http://www.bogor.ok
