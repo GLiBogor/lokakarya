@@ -1,0 +1,77 @@
+##### Partisi Linux #####
+/ (root) ext4, xfs
+swap (virtual memory): 0.5-2 X RAM
+
+##### Vim #####
+Mode edit: i
+Mode command: Esc
+
+:q! -> keluar tanpa menyimpan
+:w [namafile] -> menyimpan dengan namafile
+:wq -> menyimpan dan keluar
+u -> undo
+:redo -> redo
+yy -> copy 1 baris
+3yy -> copy 3 baris
+dd -> cut 1 baris
+3dd -> cut 3 baris
+p -> paste
+:%s/[kataawal]/[kataakhir]/g -> menggangti kataawal menjadi kataakhir
+/[string/kata] -> mencari kata
+n -> mencari kata berikutnya
+
+##### Konfigurasi Networking Ubuntu #####
+
+Verifikasi NIC
+# ip link
+
+Edit file konfigurasi network
+# vim /etc/network/interfaces
+
+auto enp0s3
+iface enp0s3 inet dhcp
+
+auto enp0s8
+iface enp0s8 inet static
+address 10.10.10.10
+netmask 255.255.255.0
+
+# ifdown enp0s3; ifup enp0s3
+# ifdown enp0s8; ifup enp0s8
+# ip addr
+
+Ping dari Laptop ke VM Ubuntu
+$ ping -c 3 10.10.10.10
+
+SSH dari Laptop ke VM Ubuntu
+$ ssh user@10.10.10.10
+
+
+##### Konfigurasi Repositori #####
+
+# cp /etc/apt/sources.list /etc/apt/sources.list.orig
+# vim /etc/apt/sources.list
+deb http://kambing.ui.ac.id/ubuntu xenial main restricted universe multiverse
+deb http://kambing.ui.ac.id/ubuntu xenial-security main restricted universe multiverse
+deb http://kambing.ui.ac.id/ubuntu xenial-updates main restricted universe multiverse
+
+# apt update
+# apt upgrade
+
+##### DNS Server BIND #####
+
+1. Instal paket bind9 dnsutils
+# apt install bind9 dnsutils
+
+2. Edit file konfigurasi zona
+# vim /etc/bind/named.conf.default-zones
+
+zone "bogor.ok" {
+        type master;
+        file "/etc/bind/db.bogor.ok";
+};
+
+zone "10.10.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/db.10.10.10";
+};
