@@ -210,3 +210,28 @@ phpinfo();
 10.10.10.10	blog.bogor.ok www.bogor.ok
 
 17. Test browsing dari laptop http://blog.bogor.ok dan http://www.bogor.ok
+
+
+##### iRedMail #####
+
+1. Set hostname FQDN
+# vim /etc/hosts
+127.0.0.1       ubuntu ubuntu.bogor.ok localhost
+
+# vim /etc/hostname
+ubuntu.bogor.ok
+
+# hostname -f
+
+2. Instal paket bzip2
+# apt install bzip2
+
+3. Unduh paket iRedMail
+# wget -c https://bitbucket.org/zhb/iredmail/downloads/iRedMail-0.9.5-1.tar.bz2
+
+4. Ekstrak paket iRedMail
+# tar -xf iRedMail-0.9.5-1.tar.bz2
+
+5. Eksekusi installer iRedMail
+# cd iRedMail-0.9.5-1
+# bash iredMail.sh
