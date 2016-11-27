@@ -98,3 +98,29 @@ ubuntu  IN      A       10.10.10.10
 www     IN      CNAME   ubuntu
 mail    IN      CNAME   ubuntu
 
+4. Buat file db reverse DNS
+
+# cp /etc/bind/db.bogor.ok /etc/bind/db.10.10.10
+# vim /etc/bind/db.10.10.10
+;
+; BIND data file for domain bogor.ok
+;
+$TTL	604800
+@	IN	SOA	ubuntu.bogor.ok. root.bogor.ok. (
+		     2016112701		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@	IN	NS	ubuntu.bogor.ok.
+10	IN	PTR	ubuntu.bogor.ok.
+
+5. Restart service bind9
+# systemctl restart bind9
+# systemctl status bind9
+
+6. Verifikasi
+# dig @10.10.10.10 bogor.ok
+# dig @10.10.10.10 bogor.ok mx
+# dig @10.10.10.10 ubuntu.bogor.ok
